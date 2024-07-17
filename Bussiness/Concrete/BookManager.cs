@@ -11,6 +11,11 @@ namespace Bussiness.Concrete
 {
     public class BookManager : IBookService
     {
+        IBooksStocksService _booksStocksService;
+        public BookManager(IBooksStocksService booksStocksService)
+        {
+            _booksStocksService = booksStocksService;
+        }
         public bool Add(Books books)
         {
             try
@@ -19,6 +24,13 @@ namespace Bussiness.Concrete
                 {
                     context.BOOKS.Add(books);
                     context.SaveChanges();
+                    BooksStocks booksStocks = new BooksStocks()
+                    {
+                        BookId = books.Id,
+                        Status  = true
+                    };
+                    _booksStocksService.Add(booksStocks);
+
                 }
             }
             catch (Exception ex)
@@ -30,9 +42,13 @@ namespace Bussiness.Concrete
             return true;
         }
 
-        public Books GetBooks()
+        public Books GetBooks(int id ) 
         {
-            throw new NotImplementedException();
+            using (var context = new LibraryProjectContext())
+            { 
+                var books= context.BOOKS.FirstOrDefault(x => x.Id == id);
+                return books;
+            }
         }
 
         public bool Update(Books books)

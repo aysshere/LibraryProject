@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Bussiness.Abstract
 {
-    public interface IBookService
+    public interface IBooksStocksService
     {
-        Books GetBooks(int id);
-        bool Add(Books books);
-        bool Update(Books books);
+        bool Add(BooksStocks booksStocks);
+
+
     }
 }

@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBookService, BookManager>();
+builder.Services.AddScoped<IBooksStocksService, BookStocksManager>();
+
 
 var app = builder.Build();
 
