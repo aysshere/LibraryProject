@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+}
+
+<form asp-action="Index" method="post">
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name" id="Name" name="Name">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" id="Author" name="Author">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name" id="Publisher" name="Publisher">
+        </div>
+        <div class="col">
+            <input type="number" class="form-control" placeholder="Last name" id="PageNumber" name="PageNumber">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" id="BookCode" name="BookCode">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Oluştur</button>
+</form>
+
