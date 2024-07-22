@@ -11,6 +11,6 @@ namespace Bussiness.Abstract
     {
         bool Add(BooksStocks booksStocks);
 
-
+        BooksStocks GetByBooksId(int bookId);
     }
 }

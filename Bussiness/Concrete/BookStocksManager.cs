@@ -29,5 +29,16 @@ namespace Bussiness.Concrete
             }
             return true;
         }
+
+        public BooksStocks GetByBooksIdCheckStocks(int bookId)
+        {
+            using (var context = new LibraryProjectContext())
+            {
+                var result = context.BOOKS_STOCKS.FirstOrDefault(x => x.BookId == bookId && x.Total > 0);
+                if (result != null)
+                    return result;
+            }
+            return null;
+        }
     }
 }

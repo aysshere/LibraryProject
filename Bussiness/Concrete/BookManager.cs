@@ -42,13 +42,27 @@ namespace Bussiness.Concrete
             return true;
         }
 
-        public Books GetBooks(int id ) 
+        public List<Books> GetAllBooks()
+        {
+            using (var context = new LibraryProjectContext())
+            {
+                var books = context.BOOKS.ToList();
+                if(books != null && books.Count()<0)
+                {
+                    return null;
+                }
+                return books;
+            }
+
+        }
+
+        public Books GetBooks(int id) 
         {
             using (var context = new LibraryProjectContext())
             { 
                 var books= context.BOOKS.FirstOrDefault(x => x.Id == id);
                 return books;
-            }
+            }  
         }
 
         public bool Update(Books books)
