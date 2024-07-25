@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Bussiness.Abstract
     {
         List<Books> GetAllBooks();
         Books GetBooks(int id);
-        bool Add(Books books);
+        bool Add(AddBooksDto addBooksDto);
         bool Update(Books books);
     }
 }

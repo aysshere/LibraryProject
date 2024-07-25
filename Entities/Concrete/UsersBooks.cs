@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    internal class UsersBooks
+    public class UsersBooks
     {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int BooksId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

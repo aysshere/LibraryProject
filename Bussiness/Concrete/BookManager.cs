@@ -1,6 +1,7 @@
 ﻿using Bussiness.Abstract;
 using DataAccess.Context;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +17,27 @@ namespace Bussiness.Concrete
         {
             _booksStocksService = booksStocksService;
         }
-        public bool Add(Books books)
+        public bool Add(AddBooksDto addBooksDto)
         {
             try
             {
                 using (var context = new LibraryProjectContext())
                 {
+                    Books books = new Books()
+                    {
+                        Name = addBooksDto.Name,
+                        BookCode = addBooksDto.BookCode,
+                        Author = addBooksDto.Author,
+                        PageNumber = addBooksDto.PageNumber,
+                        Publisher = addBooksDto.Publisher,
+                    };
+
                     context.BOOKS.Add(books);
                     context.SaveChanges();
                     BooksStocks booksStocks = new BooksStocks()
                     {
                         BookId = books.Id,
-                        Status  = true
+                        Total = addBooksDto.Total
                     };
                     _booksStocksService.Add(booksStocks);
 
@@ -47,7 +57,7 @@ namespace Bussiness.Concrete
             using (var context = new LibraryProjectContext())
             {
                 var books = context.BOOKS.ToList();
-                if(books != null && books.Count()<0)
+                if(books != null)
                 {
                     return null;
                 }

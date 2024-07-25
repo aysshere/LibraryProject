@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    internal interface IBookDal
+    internal interface IBooksDal
     {
     }
 }
