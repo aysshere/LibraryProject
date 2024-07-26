@@ -18,6 +18,12 @@
             
         </tr>
     </thead>
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">bilim kurgu</option>
+        <option value="2">psikoloji</option>
+        <option value="3">tarih</option>
+    </select>
     <tbody>
         @foreach (var books in Model.ListBooks)
         {
@@ -61,7 +67,15 @@
         <div class="col">
             <input type="number" class="form-control" placeholder="Kitap Adeti" id="Total" name="Total">
         </div>
+        <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card with stretched link</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+  </div>
 
+</div>
     </div>
     <button type="submit" class="btn btn-success">Oluştur</button>
     <button type="button" class="btn btn-outline-primary">Primary</button>

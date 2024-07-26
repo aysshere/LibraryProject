@@ -90,6 +90,7 @@ namespace Bussiness.Concrete
                                  BookCode = b.BookCode,
                                  Total = bs.Total
                              };
+                
                 return result.ToList();
             }
         }
