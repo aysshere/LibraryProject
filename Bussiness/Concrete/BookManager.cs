@@ -40,24 +40,44 @@ namespace Bussiness.Concrete
                         Total = addBooksDto.Total
                     };
                     _booksStocksService.Add(booksStocks);
-
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
                 throw;
-                return false;
             }
 
             return true;
+        }
+
+        public bool Delete(int id)
+        {
+            using (var context = new LibraryProjectContext())
+            {
+                try
+                {
+                    var getBooks = GetBooks(id);
+                    context.Remove(getBooks);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return false;
+            }
         }
 
         public List<Books> GetAllBooks()
         {
             using (var context = new LibraryProjectContext())
             {
+                
                 var books = context.BOOKS.ToList();
-                if(books != null)
+                if(books == null)
                 {
                     return null;
                 }

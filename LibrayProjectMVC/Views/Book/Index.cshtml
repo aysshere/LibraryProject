@@ -1,4 +1,4 @@
-﻿
+﻿@model ViewBooksModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_PrivateLayout.cshtml";
@@ -8,31 +8,35 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">İd</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Kitap Adı</th>
+            <th scope="col">Kitap Kodu</th>
+            <th scope="col">Yazar</th>
+            <th scope="col">Kitap Sayfa Sayısı</th>
+            <th scope="col">Yayın Evi,</th>
+            <th scope="col">İşlemler</th>
+            
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
+        @foreach (var books in Model.ListBooks)
+        {
+            <tr>
+            <td>@books.Name</td>
+            <td>@books.BookCode </td>
+            <td>@books.Author</td>
+            <td>@books.PageNumber</td>
+            <td>@books.Publisher</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@books.Id" />
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                    
+                </td>
+            </tr>
+        }
+   
+        }
     </tbody>
 </table>
 

@@ -1,5 +1,7 @@
 ﻿using Bussiness.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
+using LibrayProjectMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrayProjectMVC.Controllers
@@ -14,13 +16,24 @@ namespace LibrayProjectMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var result = _bookService.GetAllBooks();
+            
+            ViewBooksModel viewBooksModel  = new ViewBooksModel();
+            viewBooksModel.ListBooks = result;
+            return View(viewBooksModel);
         }
         [HttpPost]
-        public IActionResult Index(Books books)
+        public IActionResult Index(AddBooksDto books)
         {
             _bookService.Add(books);
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var result = _bookService.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }
