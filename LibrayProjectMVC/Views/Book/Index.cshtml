@@ -14,6 +14,7 @@
             <th scope="col">Kitap Sayfa Sayısı</th>
             <th scope="col">Yayın Evi,</th>
             <th scope="col">İşlemler</th>
+            <th scope="col">Kitap Adeti</th>
             
         </tr>
     </thead>
@@ -26,6 +27,8 @@
             <td>@books.Author</td>
             <td>@books.PageNumber</td>
             <td>@books.Publisher</td>
+            <td>@books.Total</td>
+
                 <td>
                     <form asp-action="Delete" method="post">
                         <input type="hidden" name="id" value="@books.Id" />
@@ -35,28 +38,30 @@
                 </td>
             </tr>
         }
-   
-        }
     </tbody>
 </table>
 
 <form asp-action="Index" method="post">
     <div class="row">
         <div class="col">
-            <input type="text" class="form-control" placeholder="First name" id="Name" name="Name">
+            <input type="text" class="form-control" placeholder="Kitap Adi" id="Name" name="Name">
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" id="Author" name="Author">
+            <input type="text" class="form-control" placeholder="Yazar" id="Author" name="Author">
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="First name" id="Publisher" name="Publisher">
+            <input type="text" class="form-control" placeholder="Yayın Evi" id="Publisher" name="Publisher">
         </div>
         <div class="col">
-            <input type="number" class="form-control" placeholder="Last name" id="PageNumber" name="PageNumber">
+            <input type="number" class="form-control" placeholder="Toplam Sayfa Sayısı" id="PageNumber" name="PageNumber">
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" id="BookCode" name="BookCode">
+            <input type="text" class="form-control" placeholder="Kitap Kodu" id="BookCode" name="BookCode">
         </div>
+        <div class="col">
+            <input type="number" class="form-control" placeholder="Kitap Adeti" id="Total" name="Total">
+        </div>
+
     </div>
     <button type="submit" class="btn btn-success">Oluştur</button>
 </form>

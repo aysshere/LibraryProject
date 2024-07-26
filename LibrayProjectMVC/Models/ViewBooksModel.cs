@@ -1,9 +1,10 @@
 ﻿using Entities.Concrete;
+using Entities.Dtos;
 
 namespace LibrayProjectMVC.Models
 {
     public class ViewBooksModel
     {
-        public List<Books> ListBooks { get; set; }
+        public List<BooksDto> ListBooks { get; set; }
     }
 }

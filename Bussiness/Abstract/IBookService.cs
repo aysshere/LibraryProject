@@ -10,7 +10,7 @@ namespace Bussiness.Abstract
 {
     public interface IBookService
     {
-        List<Books> GetAllBooks();
+        List<BooksDto> GetAllBooks();
         Books GetBooks(int id);
         bool Add(AddBooksDto addBooksDto);
         bool Update(Books books);

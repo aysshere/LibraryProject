@@ -71,19 +71,25 @@ namespace Bussiness.Concrete
             }
         }
 
-        public List<Books> GetAllBooks()
+        public List<BooksDto> GetAllBooks()
         {
-            using (var context = new LibraryProjectContext())
+            using (LibraryProjectContext context = new LibraryProjectContext())
             {
-                
-                var books = context.BOOKS.ToList();
-                if(books == null)
-                {
-                    return null;
-                }
-                return books;
+                var result = from b in context.BOOKS
+                             join bs in context.BOOKS_STOCKS
+                             on b.Id equals bs.BookId
+                             select new BooksDto
+                             {
+                                 Id = b.Id,
+                                 Name = b.Name,
+                                 Author = b.Author,
+                                 Publisher = b.Publisher,
+                                 PageNumber = b.PageNumber,
+                                 BookCode = b.BookCode,
+                                 Total = bs.Total
+                             };
+                return result.ToList();
             }
-
         }
 
         public Books GetBooks(int id) 

@@ -26,7 +26,10 @@ namespace LibrayProjectMVC.Controllers
         public IActionResult Index(AddBooksDto books)
         {
             _bookService.Add(books);
-            return View();
+            var result = _bookService.GetAllBooks();
+            ViewBooksModel viewBooksModel = new ViewBooksModel();
+            viewBooksModel.ListBooks = result;
+            return View(viewBooksModel);
         }
 
         [HttpPost]
