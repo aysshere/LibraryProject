@@ -40,5 +40,36 @@ namespace Bussiness.Concrete
             }
             return null;
         }
+
+        public BooksStocks GetByBooksId(int booksId)
+        {
+            using (LibraryProjectContext context = new LibraryProjectContext())
+            {
+                var result = context.BOOKS_STOCKS.FirstOrDefault(x => x.BookId == booksId);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
+        public bool Delete(BooksStocks booksStocks)
+        {
+            try
+            {
+                using (var context = new LibraryProjectContext())
+                {
+                    context.BOOKS_STOCKS.Remove(booksStocks);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+                return false;
+            }
+            return true;
+        }
     }
 }

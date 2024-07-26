@@ -10,6 +10,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Entities.DTOs;
 
 namespace Bussiness.Concrete
 {
@@ -45,22 +46,22 @@ namespace Bussiness.Concrete
             return false;
         }
 
-        public bool Update(UsersBooks usersBooks)
+        public bool Update(UsersBooksUpdateDto usersBooksUpdateDto)
         {
             try
             {
                 using (var context = new LibraryProjectContext())
                 {
-                    var existingUsersBooks = context.USERS_BOOKS.FirstOrDefault(ub => ub.Id == usersBooks.Id);
+                    var existingUsersBooks = context.USERS_BOOKS.FirstOrDefault(ub => ub.Id == usersBooksUpdateDto.Id);
                     if (existingUsersBooks == null)
                     {
                         throw new KeyNotFoundException("UsersBooks not found.");
                     }
 
-                    existingUsersBooks.UserId = usersBooks.UserId;
-                    existingUsersBooks.BooksId = usersBooks.BooksId;
-                    existingUsersBooks.StartDate = usersBooks.StartDate;
-                    existingUsersBooks.EndDate = usersBooks.EndDate;
+                    existingUsersBooks.UserId = 1;
+                    existingUsersBooks.BooksId = usersBooksUpdateDto.BooksId;
+                    existingUsersBooks.StartDate = usersBooksUpdateDto.StartDate;
+                    existingUsersBooks.EndDate = usersBooksUpdateDto.EndDate;
 
                     context.SaveChanges();
                 }

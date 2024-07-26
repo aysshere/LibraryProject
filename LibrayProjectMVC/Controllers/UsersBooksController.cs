@@ -4,6 +4,7 @@ using Bussiness.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -68,16 +69,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public ActionResult Update(UsersBooks usersBooks)
+        public ActionResult Update(UsersBooksUpdateDto usersBooksUpdateDto)
         {
-            if (usersBooks == null)
+            if (usersBooksUpdateDto == null)
             {
                 return BadRequest("UsersBooks cannot be null.");
             }
 
             try
             {
-                var result = _usersBooksService.Update(usersBooks);
+                var result = _usersBooksService.Update(usersBooksUpdateDto);
                 if (!result)
                 {
                     return StatusCode(500, "An error occurred while updating the usersBooks.");

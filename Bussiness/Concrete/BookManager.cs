@@ -60,6 +60,8 @@ namespace Bussiness.Concrete
                     var getBooks = GetBooks(id);
                     context.Remove(getBooks);
                     context.SaveChanges();
+                    var getBooksStock = _booksStocksService.GetByBooksId(id);
+                    _booksStocksService.Delete(getBooksStock);
                     return true;
                 }
                 catch (Exception)
