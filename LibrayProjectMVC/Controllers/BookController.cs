@@ -94,44 +94,15 @@ namespace LibrayProjectMVC.Controllers
             return View(viewBooksModel);
         }
 
-        // Edit - GET: Book/Edit/5
-        [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Update()
         {
-            var book = _bookService.GetById(id);
-            if (book == null)
+            var result = _bookService.GetAllBooks();
+            var viewBooksModel = new ViewBooksModel
             {
-                return NotFound();
-            }
-            return View(book);
+                ListBooks = result
+            };
+            return View(viewBooksModel);
         }
 
-        // Edit - POST: Book/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(BooksDto booksDto)
-        {
-            if (ModelState.IsValid)
-            {
-                _bookService.Update(booksDto);
-                return RedirectToAction("Index");
-            }
-            return View(booksDto);
-        }
-
-        // Delete - POST: Book/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
-        {
-            var book = _bookService.GetById(id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            _bookService.Delete(id);
-            return RedirectToAction("Index");
-        }
     }
 }
