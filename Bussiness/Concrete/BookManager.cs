@@ -4,6 +4,7 @@ using Entities.Concrete;
 using Entities.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,9 +102,17 @@ namespace Bussiness.Concrete
             }  
         }
 
+
         public bool Update(Books books)
         {
             throw new NotImplementedException();
         }
+
+        public void Update(BooksDto booksDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }
