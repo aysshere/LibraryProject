@@ -9,7 +9,9 @@ namespace Bussiness.Abstract
 {
     public interface IBooksStocksService
     {
+        BooksStocks GetByBooksId(int bookId);
         bool Add(BooksStocks booksStocks);
+        bool Delete(BooksStocks booksStocks);
         
         BooksStocks GetByBooksIdCheckStocks(int bookId);
     }
