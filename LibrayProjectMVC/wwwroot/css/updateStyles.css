@@ -1,0 +1,102 @@
+﻿/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f5dc, #d2b48c);
+    color: #333;
+}
+
+.header {
+    background-color: #8b4513;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.navbar {
+    background-color: #deb887;
+    overflow: hidden;
+}
+
+    .navbar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+            .navbar ul li a {
+                text-decoration: none;
+                color: #333;
+                font-weight: bold;
+                padding: 14px 20px;
+                display: block;
+            }
+
+                .navbar ul li a:hover {
+                    background-color: #8b4513;
+                    color: #fff;
+                    transition: 0.3s;
+                }
+
+.main-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.update-book {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+    .update-book h2 {
+        margin-bottom: 20px;
+    }
+
+    .update-book form label {
+        display: block;
+        margin: 10px 0 5px;
+        text-align: left;
+    }
+
+    .update-book form input,
+    .update-book form select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .update-book form button {
+        background-color: #8b4513;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        .update-book form button:hover {
+            background-color: #deb887;
+            transition: 0.3s;
+        }
+
+.footer {
+    background-color: #8b4513;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
