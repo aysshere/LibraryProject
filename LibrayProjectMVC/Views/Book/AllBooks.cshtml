@@ -1,0 +1,27 @@
+﻿@model ViewBooksModel
+
+@{
+    ViewData["Title"] = "AllBooks";
+    Layout = "~/Views/Shared/_PrivateLayout.cshtml";
+}
+
+
+<div class="row">
+
+    @foreach (var books in Model.ListBooks)
+    {
+        <div class="col-3 mb-2">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/img/0000000058245-1.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@books.Name</h5>
+                    <p class="card-text">@books.Author</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>
+
+

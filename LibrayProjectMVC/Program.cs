@@ -8,7 +8,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBookService, BookManager>();
 builder.Services.AddScoped<IBooksStocksService, BookStocksManager>();
 
-
+builder.Services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

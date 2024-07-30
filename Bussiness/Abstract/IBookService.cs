@@ -11,6 +11,7 @@ namespace Bussiness.Abstract
     public interface IBookService
     {
         List<BooksDto> GetAllBooks();
+        BooksDto GetBookDto(int id);
         Books GetBooks(int id);
         bool Add(AddBooksDto addBooksDto);
         bool Update(Books books);

@@ -8,9 +8,29 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\updateStyles.css" />
+    <None Include="wwwroot\img\0000000058245-1.jpg" />
+    <None Include="wwwroot\img\0000000064022-1.jpg" />
+    <None Include="wwwroot\img\0000000064031-1.jpg" />
+    <None Include="wwwroot\img\0000000064038-1.jpg" />
+    <None Include="wwwroot\img\0000000064464-1.jpg" />
+    <None Include="wwwroot\img\0000000064552-1.jpg" />
+    <None Include="wwwroot\img\0000000105409-1.jpg" />
+    <None Include="wwwroot\img\0000000105599-1.jpg" />
+    <None Include="wwwroot\img\0000000105931-1.jpg" />
+    <None Include="wwwroot\img\0000000141001-1.jpg" />
+    <None Include="wwwroot\img\0000000153127-1.jpg" />
+    <None Include="wwwroot\img\0000000204001-1.jpg" />
+    <None Include="wwwroot\img\0000000325204-1.jpg" />
+    <None Include="wwwroot\img\0000000416798-1.jpg" />
+    <None Include="wwwroot\img\0000000562120-1.jpg" />
+    <None Include="wwwroot\img\0000000628979-1.jpg" />
+    <None Include="wwwroot\img\0000000633872-1.jpg" />
+    <None Include="wwwroot\img\0000000693729-1.jpg" />
+    <None Include="wwwroot\img\0001778647001-1.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
   </ItemGroup>
 

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{9A4AC30C-2504-4A2D-82D1-9B4A3303719F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrayProjectMVC", "LibrayProjectMVC\LibrayProjectMVC.csproj", "{9546CF10-A52B-408B-BDC2-470782D4B906}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrayProjectMVC", "LibrayProjectMVC\LibrayProjectMVC.csproj", "{9546CF10-A52B-408B-BDC2-470782D4B906}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

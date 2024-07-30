@@ -83,7 +83,8 @@ namespace Bussiness.Concrete
                              on b.Id equals bs.BookId
                              select new BooksDto
                              {
-                                 Id = b.Id,
+                                 BooksId = b.Id,
+                                 BooksStocksId = bs.Id,
                                  Name = b.Name,
                                  Author = b.Author,
                                  Publisher = b.Publisher,
@@ -93,6 +94,30 @@ namespace Bussiness.Concrete
                              };
                 
                 return result.ToList();
+            }
+        }
+
+        public BooksDto GetBookDto(int id)
+        {
+            using (LibraryProjectContext context = new LibraryProjectContext())
+            {
+                var result = from b in context.BOOKS
+                             join bs in context.BOOKS_STOCKS
+                             on b.Id equals bs.BookId
+                             where b.Id == id
+                             select new BooksDto
+                             {
+                                 BooksId = b.Id,
+                                 BooksStocksId = bs.Id,
+                                 Name = b.Name,
+                                 Author = b.Author,
+                                 Publisher = b.Publisher,
+                                 PageNumber = b.PageNumber,
+                                 BookCode = b.BookCode,
+                                 Total = bs.Total
+                             };
+
+                return result.FirstOrDefault();
             }
         }
 

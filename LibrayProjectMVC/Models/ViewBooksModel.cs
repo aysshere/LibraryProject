@@ -6,5 +6,6 @@ namespace LibrayProjectMVC.Models
     public class ViewBooksModel
     {
         public List<BooksDto> ListBooks { get; set; }
+        public BooksDto BooksDto { get; set; }
     }
 }
