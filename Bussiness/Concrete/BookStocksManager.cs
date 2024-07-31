@@ -1,6 +1,8 @@
 ﻿using Bussiness.Abstract;
 using DataAccess.Context;
 using Entities.Concrete;
+using Entities.Dtos;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,5 +73,22 @@ namespace Bussiness.Concrete
             }
             return true;
         }
-    }
+
+		public bool Update(BooksStocks booksStocks)
+		{
+            using (var context = new LibraryProjectContext())
+            {
+				//var bookStock = context.BOOKS_STOCKS.FirstOrDefault(bs => bs.Id==booksStocks.Id);
+				//if (bookStock != null)
+				//{
+				//	bookStock.Total = updateBooksDto.
+				//}
+
+				var updatedEntity = context.Entry(context);
+				updatedEntity.State = EntityState.Modified;
+				context.SaveChanges();
+                return true;
+			}
+		}
+	}
 }

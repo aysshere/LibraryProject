@@ -17,7 +17,7 @@ namespace DataAccess.Context
         public DbSet<UsersBooks> USERS_BOOKS { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-G42T61L;Database=LibraryProject;Trusted_Connection=True;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-LAUGVUK;Database=LibraryProject;Trusted_Connection=True;TrustServerCertificate=true;");
         }
 
 

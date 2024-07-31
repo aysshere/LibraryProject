@@ -131,16 +131,45 @@ namespace Bussiness.Concrete
         }
 
 
-        public bool Update(Books books)
-        {
-            throw new NotImplementedException();
-        }
+		public bool Update(UpdateBooksDto updateBooksDto)
+		{
+			try
+			{
+				using (var context = new LibraryProjectContext())
+				{
+					// Güncellenmek istenen kitabı veritabanından al
+					var book = context.BOOKS.FirstOrDefault(b => b.Id == updateBooksDto.BooksId);
+					if (book == null)
+					{
+						// Kitap bulunamazsa işlem yapmadan false döndür
+						return false;
+					}
 
-        public void Update(BooksDto booksDto)
-        {
-            throw new NotImplementedException();
-        }
+					// Kitap bilgilerini güncelle
+					book.Name = updateBooksDto.Name;
+					book.BookCode = updateBooksDto.BookCode;
+					book.Author = updateBooksDto.Author;
+					book.PageNumber = updateBooksDto.PageNumber;
+					book.Publisher = updateBooksDto.Publisher;
 
-        
-    }
+                    BooksStocks booksStocks = new BooksStocks();
+					booksStocks.Total = updateBooksDto.Total;
+                    _booksStocksService.Update(booksStocks);
+					// Değişiklikleri kaydet
+					context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
+
+			return true;
+		}
+
+
+
+
+
+	}
 }

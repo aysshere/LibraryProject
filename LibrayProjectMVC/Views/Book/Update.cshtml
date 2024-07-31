@@ -16,7 +16,7 @@
     <main class="main-content">
         <section class="update-book">
             <h2>Update Book Details</h2>
-            <form action="/updateBook" method="post">
+			<form asp-action="Update" method="post">
               
 
                 <label for="title">Kitap Adı:</label>
@@ -35,7 +35,7 @@
 				<input type="text" id="author" name="BookCode" value="@Model.BooksDto.BookCode" required><br>
 
 				<label for="Total">Stok Adeti</label>
-				<input type="number" id="Total" name="BookCode" value="@Model.BooksDto.Total" required><br>
+				<input type="number" id="Total" name="Total" value="@Model.BooksDto.Total" required><br>
 
                     <option value="available">Available</option>
                     <option value="checked-out">Checked Out</option>

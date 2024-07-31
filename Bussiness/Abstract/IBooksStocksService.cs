@@ -12,6 +12,7 @@ namespace Bussiness.Abstract
         BooksStocks GetByBooksId(int bookId);
         bool Add(BooksStocks booksStocks);
         bool Delete(BooksStocks booksStocks);
+        bool Update(BooksStocks booksStocks);
         
         BooksStocks GetByBooksIdCheckStocks(int bookId);
     }

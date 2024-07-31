@@ -33,12 +33,7 @@ namespace LibrayProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(AddBooksDto booksDto)
         {
-            if (ModelState.IsValid)
-            {
-                _bookService.Add(booksDto);
-                return RedirectToAction("Index");
-            }
-
+            _bookService.Add(booksDto);
             var result = _bookService.GetAllBooks();
             var viewBooksModel = new ViewBooksModel
             {
@@ -48,7 +43,7 @@ namespace LibrayProjectMVC.Controllers
         }
 
         // Index - GET: Book/Index
-        [HttpGet]
+        //[HttpGet]
         public IActionResult AllBooks()
         {
             var result = _bookService.GetAllBooks();
@@ -58,15 +53,28 @@ namespace LibrayProjectMVC.Controllers
             };
             return View(viewBooksModel);
         }
-        public IActionResult Update(int id)
-        {
-            var result = _bookService.GetBookDto(id);
-            var viewBooksModel = new ViewBooksModel
-            {
-                BooksDto = result
-            };
-            return View(viewBooksModel);
-        }
+		//[HttpPost]
+		//public IActionResult Update(UpdateBooksDto updateBooksDto)
+		//{
+		//	if (updateBooksDto == null || updateBooksDto.BooksId <= 0)
+		//	{
+		//		return BadRequest("Invalid data.");
+		//	}
 
-    }
+		//	var isUpdated = _bookService.Update(updateBooksDto);
+
+		//	if (isUpdated)
+		//	{
+		//		return Ok("Book updated successfully.");
+		//	}
+		//	else
+		//	{
+		//		return NotFound("Book not found.");
+		//	}
+		//}
+
+
+
+
+	}
 }

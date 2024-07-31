@@ -14,8 +14,9 @@ namespace Bussiness.Abstract
         BooksDto GetBookDto(int id);
         Books GetBooks(int id);
         bool Add(AddBooksDto addBooksDto);
-        bool Update(Books books);
         bool Delete(int id);
-        void Update(BooksDto booksDto);
-    }
+        bool Update(UpdateBooksDto updatebooksDto);
+		
+		
+	}
 }
