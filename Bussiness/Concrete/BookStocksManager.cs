@@ -76,18 +76,12 @@ namespace Bussiness.Concrete
 
 		public bool Update(BooksStocks booksStocks)
 		{
-            using (var context = new LibraryProjectContext())
-            {
-				//var bookStock = context.BOOKS_STOCKS.FirstOrDefault(bs => bs.Id==booksStocks.Id);
-				//if (bookStock != null)
-				//{
-				//	bookStock.Total = updateBooksDto.
-				//}
-
-				var updatedEntity = context.Entry(context);
-				updatedEntity.State = EntityState.Modified;
+			using (var context = new LibraryProjectContext())
+			{
+				// booksStocks nesnesini güncelleme işlemi
+				context.Update(booksStocks);
 				context.SaveChanges();
-                return true;
+				return true;
 			}
 		}
 	}

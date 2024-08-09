@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Shared\_LayoutBook.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\_LayoutBook.cshtml" />
     <None Include="wwwroot\css\updateStyles.css" />
     <None Include="wwwroot\img\0000000058245-1.jpg" />
     <None Include="wwwroot\img\0000000064022-1.jpg" />
@@ -36,6 +41,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bussiness\Bussiness.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\_LayoutBook.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\_LayoutBook.cshtml" />
   </ItemGroup>
 
 </Project>

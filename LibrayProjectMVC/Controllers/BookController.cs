@@ -53,28 +53,49 @@ namespace LibrayProjectMVC.Controllers
             };
             return View(viewBooksModel);
         }
-		//[HttpPost]
-		//public IActionResult Update(UpdateBooksDto updateBooksDto)
-		//{
-		//	if (updateBooksDto == null || updateBooksDto.BooksId <= 0)
-		//	{
-		//		return BadRequest("Invalid data.");
-		//	}
 
-		//	var isUpdated = _bookService.Update(updateBooksDto);
+		[HttpGet]
+		public IActionResult Update(int id)
+		{
+			var result = _bookService.GetBookDto(id);
 
-		//	if (isUpdated)
-		//	{
-		//		return Ok("Book updated successfully.");
-		//	}
-		//	else
-		//	{
-		//		return NotFound("Book not found.");
-		//	}
-		//}
+			var viewBooksModel = new ViewBooksModel
+			{
+				BooksDto = new BooksDto
+				{
+					BooksId = result.BooksId,
+					BooksStocksId = result.BooksStocksId,
+					Author = result.Author,
+					PageNumber = result.PageNumber,
+					Publisher = result.Publisher,
+					BookCode = result.BookCode,
+					Name = result.Name,
+					Total = result.Total
+				}
+			};
 
+			return View(viewBooksModel);
+		}
 
+		[HttpPost]
+        public IActionResult Update(UpdateBooksDto updateBooksDto)
+        {
 
+			if (updateBooksDto == null || updateBooksDto.BooksId <= 0)
+            {
+                return BadRequest("Invalid data.");
+            }
 
-	}
+            var isUpdated = _bookService.Update(updateBooksDto);
+
+            if (isUpdated)
+            {
+                return Ok("Book updated successfully.");
+            }
+            else
+            {
+                return NotFound("Book not found.");
+            }
+        }
+    }
 }

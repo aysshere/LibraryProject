@@ -17,30 +17,33 @@
         <section class="update-book">
             <h2>Update Book Details</h2>
 			<form asp-action="Update" method="post">
-              
+				<label for="name">Kitap Adı:</label>
+				<input type="text" id="name" name="Name" value="@Model.BooksDto.Name" required><br>
 
-                <label for="title">Kitap Adı:</label>
-				<input type="text" id="name" name="	Name" value="@Model.BooksDto.Name" required><br>
-
-                <label for="author">Yazar:</label>
+				<label for="author">Yazar:</label>
 				<input type="text" id="author" name="Author" value="@Model.BooksDto.Author" required><br>
 
-				<label for="Publisher">Yayın Evi:</label>
-				<input type="text" id="Publisher" name="Publisher" value="@Model.BooksDto.Publisher" required><br>
+				<label for="publisher">Yayın Evi:</label>
+				<input type="text" id="publisher" name="Publisher" value="@Model.BooksDto.Publisher" required><br>
 
-				<label for="PageNumber">Toplam Sayfa Sayısı:</label>
-				<input type="number" id="author" name="PageNumber" value="@Model.BooksDto.PageNumber" required><br
+				<label for="pageNumber">Toplam Sayfa Sayısı:</label>
+				<input type="number" id="pageNumber" name="PageNumber" value="@Model.BooksDto.PageNumber" required><br>
 
-				<label for="BookCode">Kitap Kodu</label>
-				<input type="text" id="author" name="BookCode" value="@Model.BooksDto.BookCode" required><br>
+				<label for="bookCode">Kitap Kodu:</label>
+				<input type="text" id="bookCode" name="BookCode" value="@Model.BooksDto.BookCode" required><br>
 
-				<label for="Total">Stok Adeti</label>
-				<input type="number" id="Total" name="Total" value="@Model.BooksDto.Total" required><br>
+				<label for="total">Stok Adeti:</label>
+				<input type="number" id="total" name="Total" value="@Model.BooksDto.Total" required><br>
+				<input type="hidden" name="booksId" value="@Model.BooksDto.BooksId" />
+				<input type="hidden" name="bookStocksId" value="@Model.BooksDto.BooksStocksId" />
 
                     <option value="available">Available</option>
                     <option value="checked-out">Checked Out</option>
+				   <button type="submit" class="btn btn-success">Success</button>
+
                 </select><br>
-				<div class="store-container">
+			</form>
+			<div class="store-container">
 					<div class="border-animation">
 						<svg role="img" xmlns="http://www.w3.org/2000/svg" id="store" viewBox="130 0 1230 930">
 							<title xml:lang="en">Store animation loader</title>
@@ -211,9 +214,7 @@
 							<rect class="grass" x="130" y="850" fill="#a5c7e4" width="100%" height="80"></rect>
 						</svg>
 					</div>
-				</div>
-                <button type="submit">Update Book</button>
-            </form>
+				</div 
         </section>
     </main>
 </body>
