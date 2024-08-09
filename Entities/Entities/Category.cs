@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.Entities
 {
-    public class Categories
+    public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+
+        public virtual List<Book> Books { get; set; }
+
     }
 }

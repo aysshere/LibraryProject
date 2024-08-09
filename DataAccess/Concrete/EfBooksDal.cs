@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete
 {
-    internal class EfBooksDal
+    public class EfBooksDal
     {
     }
 }
