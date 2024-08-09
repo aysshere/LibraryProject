@@ -22,7 +22,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     Books books = new Books()
                     {
@@ -54,7 +54,7 @@ namespace Bussiness.Concrete
 
         public bool Delete(int id)
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 try
                 {
@@ -76,7 +76,7 @@ namespace Bussiness.Concrete
 
         public List<BooksDto> GetAllBooks()
         {
-            using (LibraryProjectContext context = new LibraryProjectContext())
+            using (LibraryProjectDb context = new LibraryProjectDb())
             {
                 var result = from b in context.BOOKS
                              join bs in context.BOOKS_STOCKS
@@ -99,7 +99,7 @@ namespace Bussiness.Concrete
 
         public BooksDto GetBookDto(int id)
         {
-            using (LibraryProjectContext context = new LibraryProjectContext())
+            using (LibraryProjectDb context = new LibraryProjectDb())
             {
                 var result = from b in context.BOOKS
                              join bs in context.BOOKS_STOCKS
@@ -123,7 +123,7 @@ namespace Bussiness.Concrete
 
         public Books GetBooks(int id) 
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             { 
                 var books= context.BOOKS.FirstOrDefault(x => x.Id == id);
                 return books;
@@ -135,7 +135,7 @@ namespace Bussiness.Concrete
 		{
 			try
 			{
-				using (var context = new LibraryProjectContext())
+				using (var context = new LibraryProjectDb())
 				{
 					// Güncellenmek istenen kitabı veritabanından al
 					var book = context.BOOKS.FirstOrDefault(b => b.Id == updateBooksDto.BooksId);

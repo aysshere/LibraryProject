@@ -13,7 +13,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     context.CATEGORIES.Add(category);
                     context.SaveChanges();
@@ -32,7 +32,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     var existingCategory = context.CATEGORIES.FirstOrDefault(c => c.Id == category.Id);
                     if (existingCategory != null)
@@ -59,7 +59,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     var category = context.CATEGORIES.FirstOrDefault(c => c.Id == id);
                     if (category != null)
@@ -84,7 +84,7 @@ namespace Bussiness.Concrete
 
         public Categories GetById(int id)
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 return context.CATEGORIES.FirstOrDefault(c => c.Id == id);
             }
@@ -92,7 +92,7 @@ namespace Bussiness.Concrete
 
         public List<Categories> GetAll()
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 return context.CATEGORIES.ToList();
             }

@@ -18,7 +18,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     context.USERS.Add(user);
                     context.SaveChanges();
@@ -36,7 +36,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     var existingUser = context.USERS.FirstOrDefault(u => u.Id == user.Id);
                     if (existingUser == null)
@@ -68,7 +68,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     var user = context.USERS.FirstOrDefault(u => u.Id == id);
                     if (user == null)
@@ -90,7 +90,7 @@ namespace Bussiness.Concrete
 
         public Users GetById(int id)
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 var user = context.USERS.FirstOrDefault(u => u.Id == id);
                 if (user == null)
@@ -104,7 +104,7 @@ namespace Bussiness.Concrete
 
         public List<Users> GetAll()
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 return context.USERS.ToList();
             }

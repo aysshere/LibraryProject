@@ -28,7 +28,7 @@ namespace Bussiness.Concrete
                 var stockCheck = _stocksService.GetByBooksIdCheckStocks(usersBooks.Id);
                 if (stockCheck != null)
                 {
-                    using (var context = new LibraryProjectContext())
+                    using (var context = new LibraryProjectDb())
                     {
                         context.USERS_BOOKS.Add(usersBooks);
                         context.SaveChanges();
@@ -50,7 +50,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     var existingUsersBooks = context.USERS_BOOKS.FirstOrDefault(ub => ub.Id == usersBooksUpdateDto.Id);
                     if (existingUsersBooks == null)
@@ -78,7 +78,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     var usersBooks = context.USERS_BOOKS.FirstOrDefault(ub => ub.Id == id);
                     if (usersBooks == null)
@@ -100,7 +100,7 @@ namespace Bussiness.Concrete
 
         public UsersBooks GetById(int id)
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 var usersBooks = context.USERS_BOOKS.FirstOrDefault(ub => ub.Id == id);
                 if (usersBooks == null)
@@ -114,7 +114,7 @@ namespace Bussiness.Concrete
 
         public List<UsersBooks> GetAll()
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 return context.USERS_BOOKS.ToList();
             }

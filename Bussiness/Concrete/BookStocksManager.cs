@@ -18,7 +18,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     context.BOOKS_STOCKS.Add(booksStocks);
                     context.SaveChanges();
@@ -34,7 +34,7 @@ namespace Bussiness.Concrete
 
         public BooksStocks GetByBooksIdCheckStocks(int bookId)
         {
-            using (var context = new LibraryProjectContext())
+            using (var context = new LibraryProjectDb())
             {
                 var result = context.BOOKS_STOCKS.FirstOrDefault(x => x.BookId == bookId && x.Total > 0);
                 if (result != null)
@@ -45,7 +45,7 @@ namespace Bussiness.Concrete
 
         public BooksStocks GetByBooksId(int booksId)
         {
-            using (LibraryProjectContext context = new LibraryProjectContext())
+            using (LibraryProjectDb context = new LibraryProjectDb())
             {
                 var result = context.BOOKS_STOCKS.FirstOrDefault(x => x.BookId == booksId);
                 if (result != null)
@@ -60,7 +60,7 @@ namespace Bussiness.Concrete
         {
             try
             {
-                using (var context = new LibraryProjectContext())
+                using (var context = new LibraryProjectDb())
                 {
                     context.BOOKS_STOCKS.Remove(booksStocks);
                     context.SaveChanges();
@@ -76,7 +76,7 @@ namespace Bussiness.Concrete
 
 		public bool Update(BooksStocks booksStocks)
 		{
-			using (var context = new LibraryProjectContext())
+			using (var context = new LibraryProjectDb())
 			{
 				// booksStocks nesnesini güncelleme işlemi
 				context.Update(booksStocks);

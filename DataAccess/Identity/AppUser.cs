@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete
+namespace DataAccess.Identity
 {
-    public class EfBooksDal
+    public class AppUser
     {
     }
 }
