@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Interfaces
+namespace Entity.Interfaces
 {
     public interface ICustomerRentRepository : IGenericRepository<CustomerRent>
     {
