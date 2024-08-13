@@ -90,7 +90,8 @@ namespace Bussiness.Concrete
                                  Publisher = b.Publisher,
                                  PageNumber = b.PageNumber,
                                  BookCode = b.BookCode,
-                                 Total = bs.Total
+                                 Total = bs.Total,
+                                 ImageUrl = b.ImageUrl
                              };
                 
                 return result.ToList();
@@ -115,7 +116,10 @@ namespace Bussiness.Concrete
                                  PageNumber = b.PageNumber,
                                  BookCode = b.BookCode,
                                  Total = bs.Total
-                             };
+
+								 
+
+							 };
 
                 return result.FirstOrDefault();
             }

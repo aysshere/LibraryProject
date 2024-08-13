@@ -17,5 +17,6 @@ namespace Entities.Concrete
         public string Publisher { get; set; }
         public int PageNumber { get; set; }
         public string BookCode { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

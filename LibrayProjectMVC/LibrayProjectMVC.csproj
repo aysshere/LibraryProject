@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <None Include="Views\Shared\_LayoutBook.cshtml" />
+    <None Include="wwwroot\css\IndexHome.css" />
     <None Include="wwwroot\css\updateStyles.css" />
     <None Include="wwwroot\img\0000000058245-1.jpg" />
     <None Include="wwwroot\img\0000000064022-1.jpg" />

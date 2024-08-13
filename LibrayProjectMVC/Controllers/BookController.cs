@@ -70,7 +70,8 @@ namespace LibrayProjectMVC.Controllers
 					Publisher = result.Publisher,
 					BookCode = result.BookCode,
 					Name = result.Name,
-					Total = result.Total
+					Total = result.Total,
+                    ImageUrl = result.ImageUrl
 				}
 			};
 

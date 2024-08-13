@@ -1,0 +1,28 @@
+﻿<!-- Views/Books/Index.cshtml -->
+@model ViewBooksModel
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var books in Model.ListBooks)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="~/img/@books.ImageUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@books.Name</h5>
+                        <p class="card-text">@books.Author</p>
+                        <button type="button" class="btn btn-success" onclick="addToCart(@books.Id, 1)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function addToCart(bookId, quantity) {
+        $.post('@Url.Action("AddToCart", "Cart")', { bookId: bookId, quantity: quantity }, function () {
+            alert('Kitap sepete eklendi!');
+        });
+    }
+</script>

@@ -18,5 +18,6 @@ namespace Entities.Dtos
         public int PageNumber { get; set; }
         public string BookCode { get; set; }
         public int Total { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
