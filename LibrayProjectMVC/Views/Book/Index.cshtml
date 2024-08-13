@@ -1,0 +1,47 @@
+﻿@using Entity.ViewModels
+@model List<BookViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var books in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@books.ImageUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@books.Name</h5>
+                        <p class="card-text">@books.Author</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#bookModal-@books.Id">Detaylar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="bookModal-@books.Id" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel-@books.Id" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="bookModalLabel-@books.Id">@books.Name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>@books.Description</p>
+                            <p>  kitap cok satanlarda </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                            <button type="button" class="btn btn-success">Sepete Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

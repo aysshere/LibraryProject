@@ -64,8 +64,4 @@
     <_ContentIncludedByDefault Remove="Views\Shared\_LayoutBook.cshtml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Book\" />
-  </ItemGroup>
-
 </Project>
