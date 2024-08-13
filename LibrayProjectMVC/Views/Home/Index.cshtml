@@ -1,7 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Entity.Entities.Book>
+@{
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center"></h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    @foreach(var book in Model)
+    {
+        <div>
+            <p>@book.Name</p>
+        </div>
+    }
 </div>
+

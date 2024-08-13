@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.Entities
+namespace Entity.ViewModels
 {
-    public class Customer: BaseEntity
+    public class CustomerViewModel
     {
-        
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -17,12 +17,5 @@ namespace Entity.Entities
         public byte Gender { get; set; }
         public string PasswordHash { get; set; }
         public bool Status { get; set; }
-        
-
-
-
-        
-        public ICollection<BookRent> BookRents { get; set; }
-
     }
 }

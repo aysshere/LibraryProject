@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Entity.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.Entities
+namespace Entity.ViewModels
 {
-    public class CustomerRent
+    public class CustomerRentViewModel
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
@@ -16,7 +17,5 @@ namespace Entity.Entities
 
         public Book Book { get; set; }
         public Customer Customer { get; set; }
-
-
     }
 }

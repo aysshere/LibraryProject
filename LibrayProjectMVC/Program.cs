@@ -1,15 +1,20 @@
-using Bussiness.Abstract;
-using Bussiness.Concrete;
+using DataAccess.Context;
+using DataAccess.Repositories;
+using DataAccess.UnitOfWorks;
+using Entity.Interfaces;
+using Entity.UnitOfWorks;
+using Microsoft.EntityFrameworkCore;
+using Service.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IBookService, BookManager>();
-builder.Services.AddScoped<IBooksStocksService, BookStocksManager>();
-
-builder.Services.AddControllersWithViews()
-                .AddRazorRuntimeCompilation();
+builder.Services.AddDbContext<LibraryProjectDb>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnStr")));
+builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddExtensions();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

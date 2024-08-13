@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Identity
+namespace Entity.ViewModels
 {
-    public class AppRole : IdentityRole<int>
+    public class RoleViewModel
     {
+        public int Id { get; set; }
+        public string RoleName { get; set; }
         public string Description { get; set; }
-
     }
 }

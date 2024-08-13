@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Interfaces
 {
-    public interface ICategoryRepository : IGenericRepository<Category>
+    public interface ICategoryService : IGenericService<Category>
     {
     }
 }
