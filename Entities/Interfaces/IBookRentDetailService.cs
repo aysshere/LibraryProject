@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Interfaces
 {
-    public interface IBookRentDetailService:IGenericService<BookRentDetail>
+    public interface IBookRentDetailService
     {
     }
 }

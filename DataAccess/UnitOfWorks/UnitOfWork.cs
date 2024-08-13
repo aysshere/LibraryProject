@@ -13,36 +13,40 @@ namespace DataAccess.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly LibraryProjectDb db;
-
-        public UnitOfWork(LibraryProjectDb db)
+        private readonly LibraryProjectDb _context;
+        private bool disposed = false;
+        public UnitOfWork(LibraryProjectDb context)  //DI Container
         {
-            this.db = db;
+            _context = context;
+        }
+        public IRepository<T> GetRepository<T>() where T : class
+        {
+            return new Repository<T>(_context);
+        }
+        public void Commit()
+        {
+            _context.SaveChanges();
         }
 
-        public IBookService Book => new BookRepository(db);
+        public async void CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
 
-
-        public IBookRentDetailService BookRentDetail => new BookRentDetailRepository(db);
-
-        public IBookRentService BookRent => new BookRentRepository(db);
-
-        public IBookStockRepository BookStock =>  new BookStockRepository(db);
-
-        public ICategoryService Category => new CategoryRepository(db);
-
-        public ICustomerService Customer => new CustomerRepository(db);
-
-        public ICustomerRentRepository CustomerRent => new CustomerRentRepository(db);
-
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+        }
         public void Dispose()
         {
-            db.SaveChanges();
-        }
-
-        public void Save()
-        {
-            db.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);  //GC - Garbage Collector
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Interfaces
 {
-    public interface ICustomerService : IGenericService<Customer>
+    public interface ICustomerService
     {
     }
 }

@@ -1,3 +1,4 @@
+using Entity.Interfaces;
 using Entity.UnitOfWorks;
 using LibrayProjectMVC.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -7,18 +8,19 @@ namespace LibrayProjectMVC.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ILogger<HomeController> _logger;
+        private readonly IBookService _bookService;
 
-        public HomeController( IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IBookService bookService)
         {
-           // _logger = logger;
-            this.unitOfWork = unitOfWork;
+             _logger = logger;
+            
+            _bookService = bookService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var books = unitOfWork.Book.GetAll();
+            var books = await _bookService.GetAllBooksAsync();
             return View(books);
         }
 

@@ -1,14 +1,16 @@
-﻿@model IEnumerable<Entity.Entities.Book>
+﻿@using Entity.ViewModels
+@model List<BookViewModel>
 @{
     ViewData["Title"] = "Index";
 }
 
 <div>
-    @foreach(var book in Model)
+    
+    
+        @foreach (var book in Model)
     {
-        <div>
-            <p>@book.Name</p>
-        </div>
+        <p>@book.Name</p>
     }
+    
 </div>
 

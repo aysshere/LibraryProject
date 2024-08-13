@@ -13,7 +13,7 @@ namespace Entity.ViewModels
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string UserType { get; set; }
+        public string UserName { get; set; }
         public byte Gender { get; set; }
         public string PasswordHash { get; set; }
         public bool Status { get; set; }

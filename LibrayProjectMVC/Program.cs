@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<LibraryProjectDb>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnStr")));
-builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddExtensions();
 var app = builder.Build();

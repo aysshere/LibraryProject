@@ -16,8 +16,9 @@ namespace Entity.Entities
         public int PageNumber { get; set; }
         public int StockNumber { get; set; }
         public string ImageUrl { get; set; }
+        public string Description { get; set; }
 
-      
+
         public virtual Category Category { get; set; }
 
     }

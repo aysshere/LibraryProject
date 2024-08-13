@@ -17,19 +17,14 @@ namespace DataAccess.Context
         public DbSet<Book> Books { get; set; }
         public DbSet<BookRent> BookRents { get; set; }
         public DbSet<BookRentDetail> BookRentDetails { get; set; }
-        public DbSet<BookStock> BookStocks { get; set; }
+        
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<CustomerRent> CustomerRents { get; set; }
-
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>().Property(b => b.ImageUrl).HasDefaultValue("/img/bookimg.jpg");
-            modelBuilder.Entity<Book>().
-                HasOne(b => b.BookStock).
-                WithMany(bs => bs.Books).
-                HasForeignKey(b => b.StockId);
+            modelBuilder.Entity<Book>().Property(b => b.ImageUrl).HasDefaultValue("/img/bookimg.jpg");           
 
             modelBuilder.Entity<Book>().
                 HasOne(b=>b.Category).
