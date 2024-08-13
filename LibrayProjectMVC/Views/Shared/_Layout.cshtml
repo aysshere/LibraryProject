@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">e-MovieSales</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Kütüphane</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,10 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Local" asp-route-isLocal="True">Yerli</a>
+                            <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index" >Kitaplar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Local" asp-route-isLocal="False">Yabancı</a>
+                            <a class="nav-link" asp-area="" asp-controller="Book" asp-action="AddBook" >Kitap Ekle</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Populer">Popüler</a>
