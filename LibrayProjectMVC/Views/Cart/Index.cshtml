@@ -1,0 +1,71 @@
+﻿@model List<LibrayProjectMVC.CartTest.CartItem>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sepet Bilgileri</h2>
+@if (Model.Count > 0)
+{
+    <table class="table table-primary table-striped">
+        <thead>
+            <tr>
+                <th>Film Adı</th>
+                <th>Birim Fiyat</th>
+                <th>Adet</th>
+                <th>Tutar</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.BookName</td>
+                    <td>@item.BookPrice</td>
+                    <td>@item.BookQuantity</td>
+                    <td>@(item.BookPrice * item.BookQuantity)</td>
+                    <td>
+                        <a asp-action="Delete" asp-controller="Cart" asp-route-id="@item.BookId">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            }
+            <tr class="fw-bold">
+                <td>Toplam</td>
+                <td></td>
+                <td>
+                    @if (TempData["ToplamAdet"] != null)
+                    {
+                        @TempData["ToplamAdet"]
+                    }
+                </td>
+                <td>
+                    @if (TempData["ToplamTutar"] != null)
+                    {
+                        @TempData["ToplamTutar"]
+                    }
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a class="btn btn-primary mx-5" asp-controller="Book" asp-action="Index">Alışverişe Devam</a>
+        <a class="btn btn-primary" asp-controller="Customer" asp-action="Login">Sepeti Onayla</a>
+        <a class="btn btn-primary float-end" asp-controller="Cart" asp-action="DeleteCart">Tümünü Sil</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-primary">
+        <strong>Sepetinizde herhangi bir ürün bulunmamaktadır!</strong>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-primary mx-5" asp-controller="Movie" asp-action="Index">Alışverişe Devam</a>
+    </div>
+}
+

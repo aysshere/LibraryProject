@@ -24,6 +24,7 @@ namespace Entity.ViewModels
         [Required(ErrorMessage = "Açıklama boş geçilemez")]
 
         public string Description { get; set; }
+        public decimal Price { get; set; }
 
     }
 }

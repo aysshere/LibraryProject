@@ -37,6 +37,8 @@ namespace Service.Extensions
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICartService, CartService>();
+           
             services.AddScoped(typeof(IAccountService), typeof(AccountService));
 
             services.AddAutoMapper(typeof(MappingProfile));
