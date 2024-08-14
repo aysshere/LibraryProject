@@ -1,0 +1,29 @@
+﻿@using Entity.ViewModels
+@model List<CategoryViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                   
+                    <div class="card-body">
+                        <h5 class="card-title">@category.Name</h5>
+                        <p class="card-text">@category.Description</p>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#bookModal-@category.Id">Detaylar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            
+        }
+    </div>
+</div>

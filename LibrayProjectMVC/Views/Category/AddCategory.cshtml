@@ -1,0 +1,27 @@
+﻿@model Entity.ViewModels.CategoryViewModel
+
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AddCategory</h1>
+
+<form asp-action="AddCategory" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>  
+    
+
+    <!-- Add other fields as necessary -->
+
+    <button type="submit" class="btn btn-primary">Add Category</button>
+</form>
