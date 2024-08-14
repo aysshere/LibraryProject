@@ -34,7 +34,6 @@ namespace Entity.ViewModels
         [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor!")]
         public string ConfirmPassword { get; set; }
 
-        public IFormFile? ProfilePicture { get; set; }
         
     }
 }

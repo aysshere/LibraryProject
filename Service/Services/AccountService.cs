@@ -44,7 +44,7 @@ namespace Service.Services
                 var result = await _roleManager.CreateAsync(role);
                 if (result.Succeeded)
                 {
-                    message = "Role created successfully.";
+                    message = "Rol başarıyla oluşturuldu.";
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace Service.Services
             }
             else
             {
-                message = "Role already exists.";
+                message = "Böyle bir rol mevcut.";
             }
             return message;
         }

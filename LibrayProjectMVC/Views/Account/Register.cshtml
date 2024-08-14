@@ -1,0 +1,65 @@
+﻿@using Entity.ViewModels
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutAuth.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="title">
+            <p>Kullanıcı Kayıt</p>
+        </div>
+        <form asp-action="Register" asp-controller="Account" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="user_details">
+                <div class="input_box">
+                    <label asp-for="FirstName" class="control-label">Ad</label>
+                    <input asp-for="FirstName" class="form-control" placeholder="Adınızı giriniz" required />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="input_box">
+                    <label asp-for="LastName" class="control-label">Soyad</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Soyadınızı giriniz" required />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="input_box">
+                    <label asp-for="UserName" class="control-label">Kullanıcı Adı</label>
+                    <input asp-for="UserName" class="form-control" placeholder="Kullanıcı adınızı giriniz" required />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="input_box">
+                    <label asp-for="PhoneNumber" class="control-label">Telefon Numarası</label>
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="Telefon numaranızı giriniz" required />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="input_box">
+                    <label asp-for="Email" class="control-label">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="Email adresinizi giriniz" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div style="display: flex;flex-wrap:wrap;gap:20px">
+                    <div class="input_box">
+                        <label asp-for="Password" class="control-label">Şifre</label>
+                        <input asp-for="Password" class="form-control" placeholder="Şifrenizi giriniz" required />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="input_box">
+                        <label asp-for="ConfirmPassword" class="control-label">Şifreyi Onaylayın</label>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Şifrenizi onaylayınız" required />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+                <div class="reg_btn">
+                    <input type="submit" value="Kayıt Ol">
+                </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
