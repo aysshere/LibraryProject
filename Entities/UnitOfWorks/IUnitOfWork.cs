@@ -13,6 +13,6 @@ namespace Entity.UnitOfWorks
 
         void Commit();  //içine SaveChanges() gelecek.
 
-        void CommitAsync();
+        Task CommitAsync();
     }
 }

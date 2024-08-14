@@ -1,4 +1,5 @@
 ﻿using Entity.Interfaces;
+using Entity.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrayProjectMVC.Controllers
@@ -18,6 +19,27 @@ namespace LibrayProjectMVC.Controllers
         {
             var books = await _bookService.GetAllBooksAsync();
             return View(books);
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddBook()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddBook(BookViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(model.ImageUrl))
+                {
+                    model.ImageUrl = "/img/" + model.ImageUrl;
+                }
+                var result = await _bookService.AddBookAsync(model);
+                TempData["Message"] = result;
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }
