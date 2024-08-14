@@ -7,6 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBookService, BookManager>();
 builder.Services.AddScoped<IBooksStocksService, BookStocksManager>();
+builder.Services.AddScoped<IAccountService, AccountManager>();
+builder.Services.AddScoped<IBookCategoriesService, BookCategoriesManager>();
+builder.Services.AddScoped<ICartService, CartManager>();
+builder.Services.AddScoped<IUsersBooksService, UsersBooksManager>();
+builder.Services.AddScoped<IUsersService, UsersManager>();
+
+
+
 
 builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();

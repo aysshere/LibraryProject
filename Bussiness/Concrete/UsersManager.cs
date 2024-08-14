@@ -46,9 +46,9 @@ namespace Bussiness.Concrete
 
                     existingUser.FirstName = user.FirstName;
                     existingUser.LastName = user.LastName;
-                    existingUser.Mail = user.Mail;
+                    existingUser.Email = user.Email;
                     existingUser.PhoneNumber = user.PhoneNumber;
-                    existingUser.UserType = user.UserType;
+                    existingUser.UserName = user.UserName;
                     existingUser.Gender = user.Gender;
                     existingUser.PasswordHash = user.PasswordHash;
                     existingUser.Status = user.Status;

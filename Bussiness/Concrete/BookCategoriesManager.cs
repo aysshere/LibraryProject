@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Bussiness.Concrete
 {
-    public class CategoriesManager : IBookCategoriesService
+    public class BookCategoriesManager : IBookCategoriesService
     {
         public bool Add(Categories category)
         {
