@@ -8,7 +8,7 @@ body {
 
 .header {
     background-color: #8b4513;
-    color: #fff;
+    color:  #00FFFF; /* Neon mavi rengi */
     text-align: center;
     padding: 2rem 0;
 }
