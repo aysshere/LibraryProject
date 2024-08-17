@@ -1,4 +1,4 @@
-﻿@model List<LibrayProjectMVC.CartTest.CartItem>
+﻿@model List<Entity.Models.CartItem>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -55,7 +55,7 @@
     </table>
     <div class="text-center">
         <a class="btn btn-primary mx-5" asp-controller="Book" asp-action="Index">Alışverişe Devam</a>
-        <a class="btn btn-primary" asp-controller="Customer" asp-action="Login">Sepeti Onayla</a>
+        <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Sepeti Onayla</a>
         <a class="btn btn-primary float-end" asp-controller="Cart" asp-action="DeleteCart">Tümünü Sil</a>
     </div>
 }
@@ -65,7 +65,7 @@ else
         <strong>Sepetinizde herhangi bir ürün bulunmamaktadır!</strong>
     </div>
     <div class="text-center">
-        <a class="btn btn-primary mx-5" asp-controller="Movie" asp-action="Index">Alışverişe Devam</a>
+        <a class="btn btn-primary mx-5" asp-controller="Book" asp-action="Index">Alışverişe Devam</a>
     </div>
 }
 

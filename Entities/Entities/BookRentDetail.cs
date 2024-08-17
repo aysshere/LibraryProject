@@ -12,6 +12,7 @@ namespace Entity.Entities
         public int BookRentId { get; set; }
         public int BookId { get; set; }
         public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
         public virtual BookRent BookRent { get; set; }
         public virtual Book Book { get; set; }
     }

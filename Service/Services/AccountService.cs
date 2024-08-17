@@ -4,7 +4,9 @@ using DataAccess.Identity;
 using Entity.Entities;
 using Entity.Interfaces;
 using Entity.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Service.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +22,18 @@ namespace Service.Services
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IMapper _mapper;
         private readonly LibraryProjectDb _context;
-        public AccountService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, SignInManager<AppUser> signInManager, IMapper mapper, LibraryProjectDb context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AccountService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, SignInManager<AppUser> signInManager, IMapper mapper, LibraryProjectDb context, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
         public async Task<string> CreateRoleAsync(RoleViewModel model)
         {
             string message = string.Empty;
@@ -68,7 +72,6 @@ namespace Service.Services
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 UserName = model.UserName,
-                
             };
 
             var identityResult = await _userManager.CreateAsync(user, model.Password);
@@ -82,12 +85,17 @@ namespace Service.Services
                     LastName = user.LastName,
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
-                    UserName = user.UserName,                   
+                    UserName = user.UserName,
                     PasswordHash = user.PasswordHash // Store hashed password or manage it as per your requirements
                 };
 
                 _context.Customers.Add(customCustomer);
                 await _context.SaveChangesAsync();
+
+                // Now customCustomer.Id should have the correct value
+
+                // Store the customer in the session
+                Session.SetJson("user", customCustomer);
 
                 message = "OK";
             }
@@ -102,6 +110,7 @@ namespace Service.Services
         }
 
 
+
         public async Task<string> FindByNameAsync(LoginViewModel model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
@@ -113,16 +122,61 @@ namespace Service.Services
             var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
             if (signInResult.Succeeded)
             {
+                // Find and map the customer from AppUser
+                var customer = await FindCustomerByNameAsync(model);
+                if (customer != null)
+                {
+                    // Store the customer in the session
+                    Session.SetJson("user", customer);
+                }
+
                 return "OK";
             }
             return "Giriş başarısız!";
         }
+
 
         public async Task<CustomerViewModel> FindByUserNameAsync(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             return _mapper.Map<CustomerViewModel>(user);
         }
+
+        public async Task<Customer> FindCustomerByNameAsync(LoginViewModel model)
+        {
+            // Attempt to find the user by their username (or email, depending on your setup)
+            var appUser = await _userManager.FindByNameAsync(model.UserName);
+
+            if (appUser == null)
+            {
+                return null; // No user found with the provided username
+            }
+
+            // Check if the password is correct
+            var passwordCheck = await _signInManager.CheckPasswordSignInAsync(appUser, model.Password, false);
+
+            if (!passwordCheck.Succeeded)
+            {
+                return null; // Invalid password
+            }
+
+            // Map the AppUser to your Customer entity (assuming you have such mapping logic)
+            var customer = new Customer
+            {
+                Id = appUser.Id, // Assuming AppUser and Customer have corresponding Id fields
+                FirstName = appUser.FirstName,
+                LastName = appUser.LastName,
+                Email = appUser.Email,
+                PhoneNumber = appUser.PhoneNumber,
+                UserName = appUser.UserName,
+                Gender = appUser.Gender,
+                PasswordHash = appUser.PasswordHash,
+                Status = appUser.Status,
+            };
+
+            return customer;
+        }
+
 
         public async Task<List<RoleViewModel>> GetAllRoles()
         {
@@ -141,6 +195,12 @@ namespace Service.Services
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public void Update(Customer customer)
+        {
+            _context.Customers.Update(customer);      //Verilen nesneyi ara katmanda günceller.
+            _context.SaveChanges();
         }
     }
 }

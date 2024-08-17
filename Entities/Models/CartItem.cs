@@ -1,4 +1,4 @@
-﻿namespace LibrayProjectMVC.CartTest
+﻿namespace Entity.Models
 {
     public class CartItem
     {

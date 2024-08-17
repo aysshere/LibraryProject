@@ -13,7 +13,7 @@ namespace Entity.ViewModels
         public DateTime RentDate { get; set; } = DateTime.Now;
         public int CustomerId { get; set; }
         public int TotalQuantity { get; set; }
-
+        public decimal TotalPrice { get; set; }
         public ICollection<BookRentDetail> BookRentDetails { get; set; }
         public virtual Customer Customer { get; set; }
 
