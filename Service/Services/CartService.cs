@@ -1,6 +1,8 @@
 ﻿using Entity.Entities;
 using Entity.Interfaces;
+using Entity.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using Service.Extensions;
 using System;
 using System.Collections.Generic;
@@ -12,65 +14,59 @@ namespace Service.Services
 {
     public class CartService : ICartService
     {
+        private readonly ISession _session;
+        private const string CartSessionKey = "Cart";
 
-        
-            /*private readonly IHttpContextAccessor _httpContextAccessor;
-            private readonly string CartSessionKey = "CartSession";
-
-            public CartService(IHttpContextAccessor httpContextAccessor)
-            {
-                _httpContextAccessor = httpContextAccessor;
-            }
-
-            *//*public List<Cart> GetCart()
-            {
-                var session = _httpContextAccessor.HttpContext.Session;
-                var cart = session.GetObjectFromJson<List<Cart>>(CartSessionKey) ?? new List<Cart>();
-                return cart;
-            }*//*
-
-            public void AddToCart(Cart item)
-            {
-                var cart = GetCart();
-                var existingItem = cart.FirstOrDefault(i => i.ProductId == item.ProductId);
-
-                if (existingItem != null)
-                {
-                    existingItem.Quantity += item.Quantity;
-                }
-                else
-                {
-                    cart.Add(item);
-                }
-
-                SaveCart(cart);
-            }
-
-            public void RemoveFromCart(int productId)
-            {
-                var cart = GetCart();
-                cart.RemoveAll(i => i.ProductId == productId);
-                SaveCart(cart);
-            }
-
-            public void ClearCart()
-            {
-                SaveCart(new List<Cart>());
-            }
-
-            public int GetTotalQuantity()
-            {
-                return GetCart().Sum(i => i.Quantity);
-            }
-
-            public decimal GetTotalPrice()
-            {
-                return GetCart().Sum(i => i.TotalPrice);
-            }
-
-            private void SaveCart(List<Cart> cart)
-            {
-                _httpContextAccessor.HttpContext.Session.SetObjectAsJson(CartSessionKey, cart);
-            }*/
+        public CartService(IHttpContextAccessor httpContextAccessor)
+        {
+            _session = httpContextAccessor.HttpContext.Session;
         }
+
+        public async Task<List<CartViewModel>> AddToCartAsync(List<CartViewModel> cart, CartViewModel cartItem)
+        {
+            var item = cart.FirstOrDefault(c => c.BookId == cartItem.BookId);
+            if (item != null)
+            {
+                item.BookQuantity += cartItem.BookQuantity;
+            }
+            else
+            {
+                cart.Add(cartItem);
+            }
+
+            SaveCart(cart);
+            return cart;
+        }
+
+        public async Task<List<CartViewModel>> DeleteFromCartAsync(List<CartViewModel> cart, int id)
+        {
+            cart.RemoveAll(c => c.BookId == id);
+            SaveCart(cart);
+            return cart;
+        }
+
+        public async Task<int> GetTotalQuantityAsync(List<CartViewModel> cart)
+        {
+            return cart.Sum(c => c.BookQuantity);
+        }
+
+        public async Task<decimal> GetTotalPriceAsync(List<CartViewModel> cart)
+        {
+            return cart.Sum(c => c.BookQuantity * c.Price);
+        }
+
+        private void SaveCart(List<CartViewModel> cart)
+        {
+            var cartJson = JsonConvert.SerializeObject(cart);
+            _session.SetString(CartSessionKey, cartJson);
+        }
+
+        public List<CartViewModel> GetCartFromSession()
+        {
+            var cartJson = _session.GetString(CartSessionKey);
+            return string.IsNullOrEmpty(cartJson) ? new List<CartViewModel>() : JsonConvert.DeserializeObject<List<CartViewModel>>(cartJson);
+        }
+
+
+    }
 }

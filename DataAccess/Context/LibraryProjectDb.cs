@@ -1,6 +1,7 @@
 ﻿
-using DataAccess.Identity;
+
 using Entity.Entities;
+using Entity.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,7 +20,7 @@ namespace DataAccess.Context
         public DbSet<BookRentDetail> BookRentDetails { get; set; }
         
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+        
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,13 +31,16 @@ namespace DataAccess.Context
                 HasOne(b=>b.Category).
                 WithMany(c=>c.Books).
                 HasForeignKey(b => b.CategoryId);
-            
-            
 
-            modelBuilder.Entity<BookRent>().
-                HasOne(br=>br.Customer).
-                WithMany(c=>c.BookRents).
-                HasForeignKey(b=>b.CustomerId);
+            modelBuilder.Entity<BookRent>()
+        .Property(b => b.TotalPrice)
+        .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<BookRentDetail>()
+                .Property(b => b.UnitPrice)
+                .HasColumnType("decimal(18,2)");
+
+            
 
             modelBuilder.Entity<BookRentDetail>().
                 HasOne(br=>br.BookRent).

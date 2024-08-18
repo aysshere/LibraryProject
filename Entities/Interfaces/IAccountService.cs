@@ -1,4 +1,5 @@
 ﻿using Entity.Entities;
+using Entity.Identity;
 using Entity.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,7 @@ namespace Entity.Interfaces
         Task<List<RoleViewModel>> GetAllRoles();
 
         Task SignOutAsync();
-        public void Update(Customer customer);
-        Task<Customer> FindCustomerByNameAsync(LoginViewModel model);
-        
+        Task<object> FindCustomerByNameAsync(LoginViewModel model);
+        Task UpdateAsync(AppUser user);
     }
 }

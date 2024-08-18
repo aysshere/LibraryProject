@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using DataAccess.Context;
-using DataAccess.Identity;
+using Entity.Identity;
 using Entity.Entities;
 using Entity.Interfaces;
-using Entity.Models;
 using Entity.ViewModels;
-using LibrayProjectMVC.CartTest;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Service.Extensions;
@@ -19,14 +18,16 @@ namespace LibrayProjectMVC.Controllers
         private readonly IBookRentService _bookRentService;
         private readonly IMapper _mapper;
         private readonly LibraryProjectDb _libraryProjectDb;
-        List<CartItem> cart = new List<CartItem>();
-        CartItem cartItem = new CartItem();
-        public AccountController(IAccountService accountService, SignInManager<AppUser> signInManager, IMapper mapper, LibraryProjectDb libraryProjectDb)
+        private readonly ICartService _cartService;
+        List<CartViewModel> cart = new List<CartViewModel>();
+        CartViewModel cartItem = new CartViewModel();
+        public AccountController(IAccountService accountService, SignInManager<AppUser> signInManager, IMapper mapper, LibraryProjectDb libraryProjectDb, ICartService cartService)
         {
             _accountService = accountService;
             _signInManager = signInManager;
             _mapper = mapper;
             _libraryProjectDb = libraryProjectDb;
+            _cartService = cartService;
         }
 
         public IActionResult Index()
@@ -104,39 +105,42 @@ namespace LibrayProjectMVC.Controllers
             return View(customerViewModel); // No need to map since it's already a CustomerViewModel
         }
         [HttpPost]
-        public IActionResult ConfirmAddress(CustomerViewModel model)
+        public async Task<IActionResult> ConfirmAddress(CustomerViewModel model)
         {
-            _accountService.Update(_mapper.Map<Customer>(model)); // This remains the same
+            var user = _mapper.Map<AppUser>(model);
+            await _accountService.UpdateAsync(user);  // Use the async update method
             HttpContext.Session.SetJson("user", model); // Store the updated CustomerViewModel
-            return RedirectToAction("ConfirmPayment","Account");
+            return RedirectToAction("ConfirmPayment", "Account");
         }
 
-        public IActionResult ConfirmPayment()
+        public async Task<IActionResult> ConfirmPayment()
         {
-            var customer = HttpContext.Session.GetJson<Customer>("user");
+            var customer = HttpContext.Session.GetJson<AppUser>("user");
             if (customer == null)
             {
                 TempData["mesaj"] = "Oturumunuz sona erdi. Lütfen tekrar giriş yapın.";
                 return RedirectToAction("Login");
             }
-            //sepet bilgileri session'dan çekilecek
-            cart = HttpContext.Session.GetJson<List<CartItem>>("sepet");
+
+            cart = HttpContext.Session.GetJson<List<CartViewModel>>("sepet");
             if (cart == null || !cart.Any())
             {
-                // Handle empty cart scenario
                 TempData["mesaj"] = "Sepetiniz boş.";
                 return RedirectToAction("Index", "Cart");
             }
-            int totalQuantity = cartItem.TotalQuantity(cart);
-            decimal totalPrice = cartItem.TotalPrice(cart);
 
-            BookRentViewModel bookRentViewModel = new BookRentViewModel();
-            bookRentViewModel.RentDate = DateTime.Now;
-            bookRentViewModel.CustomerId = customer.Id;
-            bookRentViewModel.TotalQuantity = totalQuantity;
-            bookRentViewModel.TotalPrice = totalPrice;
+            int totalQuantity = await _cartService.GetTotalQuantityAsync(cart);
+            decimal totalPrice = await _cartService.GetTotalPriceAsync(cart);
 
-            CustomerInvoiceViewModel customerInvoiceViewModel = new CustomerInvoiceViewModel()
+            BookRentViewModel bookRentViewModel = new BookRentViewModel
+            {
+                RentDate = DateTime.Now,
+                CustomerId = customer.Id,
+                TotalQuantity = totalQuantity,
+                TotalPrice = totalPrice
+            };
+
+            CustomerInvoiceViewModel customerInvoiceViewModel = new CustomerInvoiceViewModel
             {
                 customerViewModel = _mapper.Map<CustomerViewModel>(customer),
                 bookRentViewModel = bookRentViewModel,
@@ -145,6 +149,7 @@ namespace LibrayProjectMVC.Controllers
 
             return View(customerInvoiceViewModel);
         }
+
 
         [HttpPost]
         public IActionResult ConfirmPayment(CustomerInvoiceViewModel model)
@@ -156,7 +161,7 @@ namespace LibrayProjectMVC.Controllers
             }
 
             // Retrieve the customer from the session
-            var customer = HttpContext.Session.GetJson<Customer>("user");
+            var customer = HttpContext.Session.GetJson<AppUser>("user");
             if (customer == null)
             {
                 TempData["mesaj"] = "Oturumunuz sona erdi. Lütfen tekrar giriş yapın.";
@@ -183,7 +188,7 @@ namespace LibrayProjectMVC.Controllers
             }
 
             // Retrieve the cart from the session
-            var cart = HttpContext.Session.GetJson<List<CartItem>>("sepet");
+            var cart = HttpContext.Session.GetJson<List<CartViewModel>>("sepet");
             if (cart == null || !cart.Any())
             {
                 TempData["mesaj"] = "Sepetiniz boş.";

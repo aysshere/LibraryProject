@@ -8,6 +8,13 @@ namespace Entity.ViewModels
 {
     public class CartViewModel
     {
+        public int BookId { get; set; }
+        public string BookName { get; set; }
+        public int BookQuantity { get; set; }
+        public decimal Price { get; set; }
+
+        
+
 
     }
 }

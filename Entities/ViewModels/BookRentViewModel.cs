@@ -1,4 +1,5 @@
 ﻿using Entity.Entities;
+using Entity.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Entity.ViewModels
         public int TotalQuantity { get; set; }
         public decimal TotalPrice { get; set; }
         public ICollection<BookRentDetail> BookRentDetails { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual AppUser User { get; set; }
 
     }
 }

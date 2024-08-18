@@ -1,4 +1,6 @@
 ﻿using Entity.Entities;
+
+using Entity.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +11,10 @@ namespace Entity.Interfaces
 {
     public interface ICartService
     {
-        /*List<Cart> GetCart();                          // Retrieves the current cart from the session
-        void AddToCart(Cart item);                     // Adds an item to the cart
-        void RemoveFromCart(int productId);                // Removes an item from the cart based on product ID
-        void ClearCart();                                  // Clears all items from the cart
-        int GetTotalQuantity();                            // Gets the total quantity of items in the cart
-        decimal GetTotalPrice();*/
+        Task<List<CartViewModel>> AddToCartAsync(List<CartViewModel> cart, CartViewModel cartItem);
+        Task<List<CartViewModel>> DeleteFromCartAsync(List<CartViewModel> cart, int id);
+        Task<int> GetTotalQuantityAsync(List<CartViewModel> cart);
+        Task<decimal> GetTotalPriceAsync(List<CartViewModel> cart);
 
 
     }

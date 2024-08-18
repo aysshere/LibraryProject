@@ -1,69 +1,85 @@
-﻿
-using Entity.Models;
-using LibrayProjectMVC.CartTest;
+﻿using Entity.Interfaces;
+using Entity.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Service.Extensions;
 
-namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
+namespace LibrayProjectMVC.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IMovieRepository _movieRepo;
+        
+        private readonly ICartService _cartService;
+        private readonly IBookService _bookService;
 
-        public CartController(IMovieRepository movieRepo)
+        public CartController(ICartService cartService, IBookService bookService)
         {
-            _movieRepo = movieRepo;
+
+            _cartService = cartService;
+            _bookService = bookService;
         }
 
-        List<CartItem> cart = new List<CartItem>();     //sepet
-        CartItem cartItem = new CartItem();             //sipariş
-        public IActionResult Index()    //sepeti görüntüler.
+        public IActionResult Index() // Displays the cart
         {
-            cart = GetCart();  //Session'dan sepeti alıyoruz.
-            TempData["ToplamAdet"] = cartItem.TotalQuantity(cart);
-            if (cartItem.TotalPrice(cart) > 0)
-                TempData["ToplamTutar"] = cartItem.TotalPrice(cart);
-            return View(cart);
+            try
+            {
+                var cart = GetCart();  // Retrieve the cart from the session
+
+                // Convert decimal values to string before storing in TempData
+                TempData["TotalQuantity"] = _cartService.GetTotalQuantityAsync(cart).Result.ToString();
+                TempData["TotalPrice"] = _cartService.GetTotalPriceAsync(cart).Result.ToString("F2"); // "F2" formats to 2 decimal places
+
+                return View(cart);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (you can log this to a file or a logging service)
+                Console.WriteLine(ex.ToString());
+                // Optionally, show a user-friendly error message
+                return View("Error");
+            }
         }
-        public IActionResult Add(int Id, int Adet)
+        public async Task<IActionResult> Add(int id, int quantity)
         {
-            var movie = _movieRepo.Get(Id);  //sipariş edilecek movie
+            // Assuming you have a way to fetch book details, you need to replace `_movieRepo.Get(id)` 
+            // with the appropriate method to fetch the book by its ID.
 
-            cart = GetCart();               //sepetimi istiyorum (ilk olarak boş sepet)
+            var book = await _bookService.GetBookByIdAsync(id);  // Fetch the book to be added to the cart
 
-            cartItem.BookId = movie.Id;    //sipariş oluşturuyoruz.
-            cartItem.BookName = movie.Name;
-            cartItem.BookQuantity = Adet;
-            cartItem.BookPrice = movie.Price;
+            var cart = GetCart();  // Retrieve the cart from the session
 
-            cart = cartItem.AddToCart(cart, cartItem); //yeni siparişi sepete ekliyoruz.
+            var cartItem = new CartViewModel
+            {
+                BookId = book.Id,
+                BookName = book.Name,
+                BookQuantity = quantity,
+                Price = book.Price
+            };
+
+            cart = _cartService.AddToCartAsync(cart, cartItem).Result; // Add the new item to the cart
 
             SetCart(cart);
 
             return RedirectToAction("Index");
-
         }
         public IActionResult Delete(int id)
         {
-            cart = GetCart();
-            cart = cartItem.DeleteFromCart(cart, id);
-            SetCart(cart);      //session'a sepetin son halini kayıt ediyoruz.
+            var cart = GetCart();  // Retrieve the cart from the session
+            cart = _cartService.DeleteFromCartAsync(cart, id).Result;  // Remove the item from the cart
+            SetCart(cart);  // Save the updated cart back to the session
+
             return RedirectToAction("Index");
         }
-        public void SetCart(List<CartItem> sepet)   //sepet kayıt (json formatta) eder.
+        public void SetCart(List<CartViewModel> cart)  // Saves the cart to the session
         {
-            HttpContext.Session.SetJson("sepet", sepet);    //alışveriş sepetimizi sepet isimli (key) session'a kayıt ediyoruz.
+            HttpContext.Session.SetJson("cart", cart);  // Save the cart as a JSON string in the session
         }
-        public List<CartItem> GetCart()     //kayıtlı sepeti (text formatta) getirir.
+        public List<CartViewModel> GetCart()  // Retrieves the cart from the session
         {
-            var sepet = HttpContext.Session.GetJson<List<CartItem>>("sepet") ?? new List<CartItem>();
-            //?? -> ilk başta sepet olmadığından null gelir, bize boş bir sepet döndürür.
-            return sepet;
+            return HttpContext.Session.GetJson<List<CartViewModel>>("cart") ?? new List<CartViewModel>();
         }
-        public IActionResult DeleteCart()
+        public IActionResult ClearCart()  // Clears the cart from the session
         {
-            //HttpContext.Session.Clear(); //Oturumda bulunan tüm session'ları siler.
-            HttpContext.Session.Remove("sepet"); //Sadece adı sepet olan session'ı siler.
+            HttpContext.Session.Remove("cart");  // Remove the "cart" session
             return RedirectToAction("Index");
         }
     }

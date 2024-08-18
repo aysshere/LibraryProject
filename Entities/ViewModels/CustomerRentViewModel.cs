@@ -1,4 +1,6 @@
-﻿using Entity.Entities;
+﻿
+using Entity.Entities;
+using Entity.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,6 @@ namespace Entity.ViewModels
         public DateTime? EndDate { get; set; }
 
         public Book Book { get; set; }
-        public Customer Customer { get; set; }
+        public AppUser User { get; set; }
     }
 }

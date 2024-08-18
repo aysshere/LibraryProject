@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using Entity.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +18,7 @@ namespace Entity.Entities
 
 
         public ICollection<BookRentDetail> BookRentDetails { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual AppUser User { get; set; }
 
     }
 }

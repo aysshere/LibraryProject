@@ -1,4 +1,4 @@
-﻿using Entity.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,6 @@ namespace Entity.ViewModels
     {
         public CustomerViewModel customerViewModel { get; set; }
         public BookRentViewModel bookRentViewModel { get; set; }
-        public List<CartItem> cartItems { get; set; }
+        public List<CartViewModel> cartItems { get; set; }
     }
 }

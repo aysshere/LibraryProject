@@ -1,5 +1,6 @@
 ﻿using Entity.Entities;
-using Entity.Models;
+
+using Entity.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Entity.Interfaces
 {
     public interface IBookRentService
     {
-        bool AddRange(List<CartItem> cart, int satisId);
+        bool AddRange(List<CartViewModel> cart, int satisId);
         public int AddRent(BookRent bookRent);
     }
 }

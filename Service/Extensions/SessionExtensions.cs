@@ -12,19 +12,38 @@ namespace Service.Extensions
 {
     public static class SessionExtensions
     {
-        
-        public static void SetJson<T>(this ISession session, string key, T value)
+        private static readonly JsonSerializerOptions _defaultSerializerOptions = new JsonSerializerOptions
         {
-            session.SetString(key, JsonSerializer.Serialize(value));
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = false,
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+        };
+
+        public static void SetJson<T>(this ISession session, string key, T value, JsonSerializerOptions options = null)
+        {
+            var jsonOptions = options ?? _defaultSerializerOptions;
+            session.SetString(key, JsonSerializer.Serialize(value, jsonOptions));
         }
-        public static T? GetJson<T>(this ISession session, string key)
+
+        public static T? GetJson<T>(this ISession session, string key, JsonSerializerOptions options = null)
         {
-            var value = session.GetString(key); // This retrieves the JSON string from the session
-            if (value != null)
+            var jsonOptions = options ?? _defaultSerializerOptions;
+            var value = session.GetString(key);
+            if (value == null)
             {
-                Console.WriteLine($"JSON being deserialized: {value}"); // This will print out the JSON
+                return default;
             }
-            return value == null ? default : JsonSerializer.Deserialize<T>(value); // This is where the error occurs
+
+            try
+            {
+                return JsonSerializer.Deserialize<T>(value, jsonOptions);
+            }
+            catch (JsonException ex)
+            {
+                // Log the exception or handle it as necessary
+                // For now, we'll just return the default value.
+                return default;
+            }
         }
     }
 }

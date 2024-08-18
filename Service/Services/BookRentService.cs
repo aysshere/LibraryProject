@@ -1,7 +1,7 @@
 ﻿using DataAccess.Context;
 using Entity.Entities;
 using Entity.Interfaces;
-using Entity.Models;
+using Entity.ViewModels;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,7 +21,7 @@ namespace Service.Services
             _libraryProjectDb = libraryProjectDb;
         }
 
-        public bool AddRange(List<CartItem> cart, int satisId)
+        public bool AddRange(List<CartViewModel> cart, int satisId)
         {
             foreach (var item in cart)
             {
@@ -30,7 +30,7 @@ namespace Service.Services
                     BookRentId = satisId,
                     BookId = item.BookId,
                     Quantity = item.BookQuantity,
-                     UnitPrice = item.BookPrice
+                     UnitPrice = item.Price
                 };
                 _libraryProjectDb.BookRentDetails.Add(yeniSiparis); // Ara katmana ekler
             }
